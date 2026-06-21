@@ -420,8 +420,8 @@
         const sec = (peaks[j]-peaks[i]) / sampleRate;
         if (sec <= 0) continue;
         let bpm = 60/sec;
-        while (bpm < 80) bpm *= 2;
-        while (bpm > 175) bpm /= 2;
+        while (bpm < 55) bpm *= 2;
+        while (bpm > 150) bpm /= 2;
         const key = Math.round(bpm);
         votes[key] = (votes[key]||0) + 1;
       }

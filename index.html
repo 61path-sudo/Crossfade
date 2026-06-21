@@ -484,8 +484,16 @@
       this.bpmInput.addEventListener('change', ()=>{
         const v = parseFloat(this.bpmInput.value);
         if (!v || v <= 0) return;
-        this.bpm = v; this.originalBpm = v;
-        this.audio.playbackRate = 1;
+        if (this.originalBpm){
+          // Cambia davvero la velocità, in proporzione al BPM originale del brano
+          this.audio.playbackRate = v / this.originalBpm;
+          this.bpm = v;
+        } else {
+          // Nessun BPM rilevato: questo valore diventa il riferimento a velocità normale
+          this.originalBpm = v;
+          this.bpm = v;
+          this.audio.playbackRate = 1;
+        }
         this.syncBtn.classList.remove('synced');
         this.syncBtn.disabled = false;
       });
